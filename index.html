@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>TEST</title>
+		<link rel="stylesheet" href="zui.css" type="text/css" />
+		<script type="module">
+			import {
+				Element, Attr, Var, Color
+			} from "./index.js";
+
+			import {
+				uuid,
+				random_int
+			} from "./maths/index.js"
+
+			Element('z-test', {
+				message: Attr(String).required(),
+				color: Var(Color),
+
+				["@connected"]() {
+					this.textContent = this.message;
+				},
+				
+				// Generic Events:
+				["@mouseover"](e) {
+					this.textContent = this.color.join(':');
+				},
+				["@click"](e) {
+					this.color = [
+						random_int(20, 255),
+						random_int(20, 250),
+						random_int(20, 245)
+					];
+					alert(this.color.constructor);
+				},
+				["@resize"](e) {
+					console.log(e.rect);
+				},
+				["@render"](e) {
+					// this.style.height = `${this.rect.height + 1}px`;
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<z-test message="Hello, World"></z-test>
+	</body>
+</html>

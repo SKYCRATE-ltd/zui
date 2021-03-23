@@ -1,0 +1,10 @@
+z-test {
+	--color:#befc2a;
+	--pos:(0px, 0px);
+	display:block;
+	color:black;
+	background-color:var(--color);
+	width:200px;
+	min-height:200px;
+}
+
