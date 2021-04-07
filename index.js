@@ -204,6 +204,7 @@ export class Color extends V {
 		super(...args);
 	}
 	static validate(string) {
+		// TODO: rgba regexp test as well...
 		return HexRegEx.test(string);
 	}
 	static defines(value) {
@@ -218,7 +219,7 @@ export class Color extends V {
 			for (let i = 0; i < 6; i += 2)
 				rgb.push(parseInt(string.substr(i, 2), 16));
 			console.log(this);
-			return new this(rgb);
+			return new this(...rgb);
 		}
 		return new this(.../rgba?\((.*)\)/.exec(string)[1].trim()
 											.split(',')
