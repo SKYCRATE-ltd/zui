@@ -24,6 +24,7 @@
   "homepage": "https://github.com/SKYCRATE-ltd/zui#readme",
   "dependencies": {
     "jst": "github:SKYCRATE-ltd/jst#frontend",
+    "maths": "github:SKYCRATE-ltd/maths",
     "zed": "github:SKYCRATE-ltd/zed"
   }
 }
