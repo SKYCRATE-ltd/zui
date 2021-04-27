@@ -10,11 +10,11 @@ import {
 	Vector as V
 } from "maths";
 
-/* Element States */
+/* Component States */
 const CONNECTED = Symbol("connected");
 const RECTANGLE = Symbol("rectangle");
 
-/* Element Events */
+/* Component Events */
 const CONNECT = 'connect';
 const DISCONNECT = 'disconnect';
 const RENDER = 'render';
@@ -252,7 +252,7 @@ export class Time extends V {
 	}
 }
 
-export const Element = MetaType('Element', (tag, properties, prototype, _defaults, LISTENERS) => {
+export default MetaType('Component', (tag, properties, prototype, _defaults, LISTENERS) => {
 	const ATTRIBUTES = properties.filter(([key, prop]) => prop instanceof Attr);
 	const VARIABLES = properties.filter(([key, prop]) => prop instanceof Var);
 
@@ -266,13 +266,13 @@ export const Element = MetaType('Element', (tag, properties, prototype, _default
 			return document.create(tag).assign(attributes);
 		}
 	}[tag];
-	const Element = class extends Class(HTMLElement, {
+	const Component = class extends Class(HTMLElement, {
 		[CONNECTED]: false,
 		[RECTANGLE]: new DOMRect(),
 	}) {
 		constructor() {
 			super();
-			this.define(properties);
+			this.define(properties); // TODO: <-- We should be able to move this up...
 			this.assign(_defaults);
 			prototype.init && prototype.init.call(this);
 		}
@@ -322,9 +322,7 @@ export const Element = MetaType('Element', (tag, properties, prototype, _default
 			return Constructor.defines(instance);
 		}
 	};
-	Element.prototype.static(prototype);
-	customElements.define(tag, Element);
+	Component.prototype.static(prototype);
+	customElements.define(tag, Component);
 	return Constructor;
 });
-
-export default Element;
